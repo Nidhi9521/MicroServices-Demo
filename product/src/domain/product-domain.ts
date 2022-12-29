@@ -11,22 +11,30 @@ export class productDomain {
     }
 
     static async updateproduct(req: Request, res: Response) {
-        await productDatabaseLayer.updateproduct(req,req.params.id);
-        res.status(201).send({ updated: true });
+        const data = await productDatabaseLayer.updateproduct(req, req.params.id);
+        if (data) {
+            res.status(201).send({ updated: true });
+        } else {
+            res.status(400).send({ error: "Data Not Found" })
+        }
     }
 
     static async deleteproduct(req: Request, res: Response) {
-        await productDatabaseLayer.deleteproduct(req,req.params.id);
-        res.status(201).send({ deleted: true });
+        const data = await productDatabaseLayer.deleteproduct(req, req.params.id);
+        if (data) {
+            res.status(201).send({ deleted: true });
+        } else {
+            res.status(400).send({ error: "Data Not Found" })
+        }
     }
 
     static async getproductId(req: Request, res: Response) {
-        const product =  await productDatabaseLayer.getproductById(req,req.params.id);
+        const product = await productDatabaseLayer.getproductById(req, req.params.id);
         res.status(201).send(product);
     }
-    
+
     static async getproduct(req: Request, res: Response) {
-        const product =  await productDatabaseLayer.getproduct();
+        const product = await productDatabaseLayer.getproduct();
         res.status(201).send(product);
     }
 

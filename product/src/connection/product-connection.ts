@@ -4,11 +4,11 @@ import { ProductDoc, ProductModel, ProductSchema } from '../model/product';
 let productMongoCon: mongoose.Connection;
 let Product: ProductModel;
 
-export function mongoproductCon(uri: string) {
+export function mongoProductCon(uri: string) {
     console.log("uri: ", uri);
     
     productMongoCon = mongoose.createConnection(uri);
-    Product = mongoose.model<ProductDoc, ProductModel>('product', ProductSchema);
+    Product = productMongoCon.model<ProductDoc, ProductModel>('product', ProductSchema);
 
 }
 

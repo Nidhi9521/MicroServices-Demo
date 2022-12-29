@@ -6,12 +6,12 @@ import { ProductDoc } from "./product";
 // that are required to cretae new user
 export interface OrderAttrs {
     customerName:string,
-    productId:[
+    productId:
         {
             _id:string,
             qty:number,
-        }
-    ],
+            subTotal:number
+        }[],
     totalPrice:number
 }
 
@@ -25,13 +25,13 @@ export interface OrderDoc extends mongoose.Document {
     createdAt: Date;
     updatedAt: Date;
     customerName:string,
-    productId:[{_id:ProductDoc,qty:number}],
+    productId:{_id:ProductDoc,qty:number,subTotal:number}[],
     totalPrice:{type:Number},
 }
 
 export const OrderSchema = new mongoose.Schema({
     customerName: { type: String, },
-    productId:[{_id:{type:String,ref:'product'},qty:{type:Number,default:0}}],
+    productId:[{_id:{type:String,ref:'product'},qty:{type:Number,default:0},subTotal:{type:Number,default:0}}],
     totalPrice:{type:Number},
     createdAt: { type: Date, default: () => Date.now() },
     updatedAt: { type: Date, default: () => Date.now() },

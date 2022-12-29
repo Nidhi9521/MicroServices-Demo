@@ -5,7 +5,7 @@ export interface OrderCreatedEvent {
     data: {
         id: string;
         customerName: string,
-        productId: [{ _id: string, qty: number }],
-        totalPrice: { type: Number },
+        productId: {_id:string,qty:number,subTotal:number}[],
+        totalPrice: number,
     };
 }

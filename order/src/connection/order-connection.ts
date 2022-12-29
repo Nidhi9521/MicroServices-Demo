@@ -8,7 +8,7 @@ export function mongoOrderCon(uri: string) {
     console.log("uri: ", uri);
     
     orderMongoCon = mongoose.createConnection(uri);
-    Order = mongoose.model<OrderDoc, OrderModel>('Order', OrderSchema);
+    Order = orderMongoCon.model<OrderDoc, OrderModel>('Order', OrderSchema);
 
 }
 
